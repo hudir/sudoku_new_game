@@ -5,9 +5,12 @@ const PORT = 5000;
 const newGameRouter = require('./routes/new_game_router')
 
 app.use(express.json());
-app.use(cors);
+app.use(cors());
 
-app.use('/', newGameRouter)
+app.get('/', (req,res) => {
+    res.send('<h1>Welcome to simple Sudoku new game server</h1><p><a href="http://localhost:5000/newgame">Start New Game</a></p>')
+})
+app.use('/newgame', newGameRouter)
 
 app.listen(PORT, error => {
     if(error) console.log(error)
