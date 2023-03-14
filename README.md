@@ -24,3 +24,17 @@ You can use broswer with the url [http://localhost:5000/newgame](http://localhos
      "sudoku":"1.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37."
   }
   ```
+
+  ## How to create a new sudoku puzzle?
+
+  #### 1- need a random fulfilled sudoku puzzle
+  - 9x9 puzzle with numbers from 1-9
+     - at begining puzzle shold looks like [1-9].repeat(81).join() - array with 81 element, each ele is also a arr with 1-9 inside of it
+     - store the puzzle and take a random number from the first array, and replace the arr with it
+     - update the line, row and region, all the array element should not have the random number anymore
+     - repeat this process until all element in puzzle are numbers(no array ele left)
+  - check each line, each number should only only appear only 1 time
+  - check each row
+  - check each region
+   
+  #### 2- hide some element of it base on level(easy-10, middle-20)
