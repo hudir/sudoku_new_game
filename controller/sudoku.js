@@ -20,6 +20,7 @@ class Sudoku{
             const num = this.randomNum(this.puzzle[i])
             this.puzzle[i] = num
             this.updateRow(i, num)
+            this.updateColumn(i, num)
 
         }
 
@@ -31,18 +32,29 @@ class Sudoku{
         const rowEnd = rowStart + 8 
         // console.log(rowStart, ' ', rowEnd)
         for(let i = rowStart; i <= rowEnd; i++) {
-            if(Array.isArray(this.puzzle[i])){
+            if(i != index && Array.isArray(this.puzzle[i])){
                 this.puzzle[i] = this.puzzle[i].filter(x=> x != num)
             }
         }
     }
 
+    updateColumn(index, num){
+        const firEleInCol = index % 9
+        for(let i = firEleInCol; i < 81; i+=9){
+            if(i != index && Array.isArray(this.puzzle[i])){
+                this.puzzle[i] = this.puzzle[i].filter(x=> x != num)
+            }
+        }
+    }
 
+    updateregion(index,num){}
 
 }
 
 const test = new Sudoku()
 console.log(test.puzzle.length) //==> 81
 console.log(test.updateRow(80)) 
+console.log(test.updateColumn(17))
 console.log(test.createNewFulfilledPuzzle())
+
 
