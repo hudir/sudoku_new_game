@@ -47,7 +47,21 @@ class Sudoku{
         }
     }
 
-    updateregion(index,num){}
+    updateregion(index, num){}
+
+    shortestArr(arr = this.puzzle){
+        let index = -1
+        arr.reduce((acc ,ele, i)=>{
+            if(Array.isArray(ele) && ele.length <= acc) {
+                acc = ele.length
+                index = i
+            }
+            return acc
+        }, 10)
+        return index
+    }
+
+
 
 }
 
