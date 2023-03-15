@@ -32,7 +32,7 @@ GET method
      will return JSON with a newly generated sudoku puzzle that looks like this:
      ```
      {
-        "sudoku":".7.3.8.45.54679318...15497249.8.273......7564..654..89...413896.4.7..1.3..829.   45.",
+        "sudoku":".7.3.8.45.54679318...15497249.8.273......7564..654..89...413896.4.7..1.3..829.45.",
         "roundToCreateFulfilledPuzzle":81,
         "hiddenBlocks":32
       }
@@ -42,10 +42,10 @@ GET method
      will return JSON with a newly generated sudoku puzzle and its solution, like this:
      ```
      {
-         "sudoku":".497.62.3.31894.6.76.23.849....79184....1.75.5....839265.4...31......425..3.2.678",
-         "roundToCreateFulfilledPuzzle":81,
-         "hiddenCells":36
-         "solution":"849756213231894567765231849326579184984312756517648392652487931178963425493125678"
+        "sudoku":".497.62.3.31894.6.76.23.849....79184....1.75.5....839265.4...31......425..3.2.678",
+        "roundToCreateFulfilledPuzzle":81,
+        "hiddenCells":36
+        "solution":"849756213231894567765231849326579184984312756517648392652487931178963425493125678"
      }
      ```
 
@@ -57,18 +57,17 @@ GET method
   #### 1 - Generate a random fulfilled sudoku puzzle
   - 9x9 puzzle with numbers from 1-9
 
-     - at the beginning puzzle should look like [1-9].repeat(81) - puzzle with 81 cells, each cell is an arr with 1-9 inside of it
-     - find the min length of all arr cells and look up those cells with the min length
-     - randomly take one of the shortest cell as target
+     - at the beginning the puzzle should have 81 cells, each cell is an array, and each array has 1-9 inside it
+     - find the min length of all arr cells. Use the min length to find cells.
+     - randomly take one of the shortest cells as a target
      - the target is an arr now get a random number from it
      - use that number to update all cells of the same line, row and region, all the array cells should not have that number anymore
        - after the update, check the cell's length, it should be bigger than 0 
-         - if any arr cell is empty after the update, change the puzzle to init state and restart the whole process
-       - if the arr cell has only one number inside it. it will be pushed to an array, which will be used to hide cells after
+         - if the cell is empty after the update, change the puzzle to init state and restart the whole process
+       - if the arr cell has only one number inside it. it will be pushed to an array, which will be used for hiding cells after
        - replace the arr cell with that random number
      - repeat this process 81 times until all cells in the puzzle are numbers
 
-   
   #### 2 - hide some cells of it
   - hide all the cells in the hide arr
   - That means for level easy/one (what we only have now), each hidden number is a unique choice for its cell during the process of creating the fulfilled puzzle
