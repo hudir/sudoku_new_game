@@ -92,8 +92,8 @@ class Sudoku {
     }
 
     updateregion(index, num){
-        // split the puzzle in to 9 area
-        // x and y dirctions with number 0 1 2 to locate the element
+        // split the puzzle in to 9 blocks
+        // x and y dirctions with number 0 1 2 to locate the block
         const xRegion = Math.floor(index / 27)
         const yRegion = Math.floor((index % 9) / 3)
         const regionStartPoint = xRegion * 27 + yRegion * 3
@@ -115,17 +115,5 @@ class Sudoku {
         return true
     }
 }
-
-const test = new Sudoku(1)
-console.log(test.puzzle.length) //==> 81
-console.log(test.updateRow(80)) 
-console.log(test.updateColumn(17))
-console.log(test.updateregion(6))
-
-console.log(test.createNewGame())
-// console.log(test.createNewFulfilledPuzzle().join(''))
-console.log(test.roundToCreateFulfilledPuzzle)
-console.log(test.timesToMakePuzzle)
-console.log(test.hide.length)
 
 module.exports = Sudoku
