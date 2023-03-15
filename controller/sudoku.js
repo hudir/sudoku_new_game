@@ -48,7 +48,12 @@ class Sudoku{
         }
     }
 
-    updateregion(index, num){}
+    updateregion(index, num){
+        const xRegion = Math.floor(index / 27)
+        const yRegion = Math.floor((index % 9) / 3)
+        const regionStartPoint = xRegion * 27 + yRegion * 3
+        console.log(regionStartPoint)
+    }
 
     shortestArr(arr = this.puzzle){
         let index = -1
@@ -70,6 +75,8 @@ const test = new Sudoku()
 console.log(test.puzzle.length) //==> 81
 console.log(test.updateRow(80)) 
 console.log(test.updateColumn(17))
-console.log(test.createNewFulfilledPuzzle())
+console.log(test.updateregion(2))
+
+// console.log(test.createNewFulfilledPuzzle())
 
 
