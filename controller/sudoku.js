@@ -22,16 +22,14 @@ class Sudoku{
             this.puzzle[target] = num
             this.updateRow(target, num)
             this.updateColumn(target, num)
-
+            this.updateregion(target, num)
         }
-
         return this.puzzle
     }
 
     updateRow(index, num){
         const rowStart = Math.floor(index / 9) * 9
         const rowEnd = rowStart + 8 
-        // console.log(rowStart, ' ', rowEnd)
         for(let i = rowStart; i <= rowEnd; i++) {
             if(i != index && Array.isArray(this.puzzle[i])){
                 this.puzzle[i] = this.puzzle[i].filter(x=> x != num)
@@ -41,7 +39,7 @@ class Sudoku{
 
     updateColumn(index, num){
         const firEleInCol = index % 9
-        for(let i = firEleInCol; i < 81; i+=9){
+        for(let i = firEleInCol; i < 81; i += 9){
             if(i != index && Array.isArray(this.puzzle[i])){
                 this.puzzle[i] = this.puzzle[i].filter(x=> x != num)
             }
@@ -52,7 +50,14 @@ class Sudoku{
         const xRegion = Math.floor(index / 27)
         const yRegion = Math.floor((index % 9) / 3)
         const regionStartPoint = xRegion * 27 + yRegion * 3
-        console.log(regionStartPoint)
+        
+        for(let i = regionStartPoint; i < (regionStartPoint + 3); i++) {
+            for(let j = i; j <= (i + 18); j += 9) {
+                if(j != index && Array.isArray(this.puzzle[j])){
+                    this.puzzle[j] = this.puzzle[j].filter(x=> x != num)
+                }
+            }
+        }
     }
 
     shortestArr(arr = this.puzzle){
@@ -75,8 +80,8 @@ const test = new Sudoku()
 console.log(test.puzzle.length) //==> 81
 console.log(test.updateRow(80)) 
 console.log(test.updateColumn(17))
-console.log(test.updateregion(2))
+console.log(test.updateregion(6))
 
-// console.log(test.createNewFulfilledPuzzle())
+console.log(test.createNewFulfilledPuzzle().join(''))
 
 
