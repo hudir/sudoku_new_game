@@ -19,10 +19,9 @@ You can use broswer with the url [http://localhost:5000/newgame](http://localhos
   will return json looks like this:
   ```
   {
-     "lastGameIndex":2,
-     "newGameIndex":1,
-     "sudoku":"1.5..2.84..63.12.7.2..5.....9..1....8.2.3674.3.7.2..9.47...8..1..16....926914.37."
-  }
+     "sudoku":".7.3.8.45.54679318...15497249.8.273......7564..654..89...413896.4.7..1.3..829.45.",
+     "roundToCreateFulfilledPuzzle":81,
+     "hiddenBlocks":32}
   ```
 
   ## How to create a new sudoku puzzle?
@@ -46,5 +45,6 @@ You can use broswer with the url [http://localhost:5000/newgame](http://localhos
    
   #### 2- hide some element of it
   - hide all the ele in the hide arr
-  - but make sure the puzzle still have and only have one unique solution
+  - That means for level one(what we only have now), each hidden num is a unique num for it's cell duiring the process of create the fulfilled puzzle
+  - so the puzzle should have and only have one unique solution
          
