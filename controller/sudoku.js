@@ -1,11 +1,22 @@
 class Sudoku {
     constructor(level){
-        this.level = level
+        this.level = 1 // 1-3
         this.oneToNine = [1, 2, 3, 4, 5, 6, 7, 8, 9]
         this.puzzle = this.createInitPuzzle()
         this.roundToCreateFulfilledPuzzle = 0
         this.timesToMakePuzzle = 0
+        this.hide = []
     };
+
+    createNewGame(){
+        this.createNewFulfilledPuzzle()
+        const newPuzzle = [...this.puzzle]
+        this.hide.forEach(obj =>{
+            newPuzzle[obj.index] = '.'
+        })
+        return newPuzzle.join('')
+
+    }
 
     createInitPuzzle(){
         let arr = []
@@ -25,28 +36,40 @@ class Sudoku {
             const colRes = this.updateColumn(target, num)
             const regRes = this.updateregion(target, num)
             if(rowRes && colRes && regRes) {
+                if(this.puzzle[target].length <= this.level) {
+                    this.hide.push({
+                        num: this.puzzle[target][0],
+                        index: target
+                    })
+                }
                 this.puzzle[target] = num
                 this.roundToCreateFulfilledPuzzle++
             } else {
                 this.puzzle = this.createInitPuzzle()
                 i = -1
                 this.timesToMakePuzzle++
-            }
-            
+                this.hide = []
+            } 
         }
         return this.puzzle
     }
 
     shortestArr(arr = this.puzzle){
-        let index = -1
-        arr.reduce((acc ,ele, i)=>{
-            if(Array.isArray(ele) && ele.length <= acc) {
+        let index = []
+        const minlenth = arr.reduce((acc ,ele)=>{
+            if(Array.isArray(ele) && ele.length < acc) {
                 acc = ele.length
-                index = i
             }
             return acc
         }, 10)
-        return index
+
+        arr.forEach((ele, i) => {
+            if(Array.isArray(ele) && ele.length == minlenth) {
+                index.push(i)
+            }
+        })
+
+        return this.randomNum(index)
     }
 
     updateRow(index, num){
@@ -69,6 +92,8 @@ class Sudoku {
     }
 
     updateregion(index, num){
+        // split the puzzle in to 9 area
+        // x and y dirctions with number 0 1 2 to locate the element
         const xRegion = Math.floor(index / 27)
         const yRegion = Math.floor((index % 9) / 3)
         const regionStartPoint = xRegion * 27 + yRegion * 3
@@ -82,27 +107,24 @@ class Sudoku {
         return true
     }
 
-    updateArr(currentIndex, targetIndex,num){
+    updateArr(currentIndex, targetIndex, num){
         if(currentIndex != targetIndex && Array.isArray(this.puzzle[currentIndex])) {
             this.puzzle[currentIndex] = this.puzzle[currentIndex].filter(x=> x != num)
             return this.puzzle[currentIndex].length > 0
         } 
         return true
     }
-
-    
-
 }
 
-const test = new Sudoku()
+const test = new Sudoku(1)
 console.log(test.puzzle.length) //==> 81
 console.log(test.updateRow(80)) 
 console.log(test.updateColumn(17))
 console.log(test.updateregion(6))
 
-console.log(test.createNewFulfilledPuzzle())
+console.log(test.createNewGame())
+// console.log(test.createNewFulfilledPuzzle().join(''))
 console.log(test.roundToCreateFulfilledPuzzle)
 console.log(test.timesToMakePuzzle)
-
-
+console.log(test.hide.length)
 
