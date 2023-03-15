@@ -56,7 +56,7 @@ class Sudoku {
 
     shortestArr(arr = this.puzzle){
         let index = []
-        const minlenth = arr.reduce((acc ,ele)=>{
+        const minlength = arr.reduce((acc ,ele)=>{
             if(Array.isArray(ele) && ele.length < acc) {
                 acc = ele.length
             }
@@ -64,7 +64,7 @@ class Sudoku {
         }, 10)
 
         arr.forEach((ele, i) => {
-            if(Array.isArray(ele) && ele.length == minlenth) {
+            if(Array.isArray(ele) && ele.length == minlength) {
                 index.push(i)
             }
         })

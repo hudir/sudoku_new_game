@@ -1,26 +1,35 @@
+[About](#sudoku-new-game)
+
+[Quick start](#how-to-start-the-server-locally)
+
+[API](#api)
+
+[Algorithm](#algorithm)
+
 # Sudoku new game
-- Simple server for generate a new sudoku puzzle
-- Each puzzle is random generated and shold have a unique solution
+- Simple server for generating a new sudoku puzzle
+- Each puzzle is randomly generated and should have a unique solution
 - Now only have level easy
-- The numbers of hidden cells is about 30 - 40
+- The number of hidden cells is about 30 - 40
+- Use [Sudoku Solver](https://soduko-solver.onrender.com/) to check if the puzzle can get a solution
 - Have fun!
 
 # How to start the server locally
 
 - Clone this repo
-- In root folder Open terminal
+- In the root folder Open terminal
 - Install dependencies using $ `npm install`
 - Starting the server with $ `npm start`
 
-now the server is running and in terminal you can see `Sudoku new game server is running on 5000`
+now the server is running and in the terminal, you can see `Sudoku new game server is running on http://localhost:5000`
 
-You can use broswer with the url [http://localhost:5000/newgame](http://localhost:5000/newgame) to check it.
+You can use the browser with the URL [http://localhost:5000/newgame](http://localhost:5000/newgame) to check it.
 
-## API
+# API
 GET method
 - `/newgame` 
    
-     will return JSON with New generated sudoku puzzle looks like this:
+     will return JSON with a newly generated sudoku puzzle that looks like this:
      ```
      {
         "sudoku":".7.3.8.45.54679318...15497249.8.273......7564..654..89...413896.4.7..1.3..829.   45.",
@@ -30,37 +39,38 @@ GET method
      ```
 - `/newgame/solution`
 
-     will return JSON with New generated sudoku puzzle looks like this:
+     will return JSON with a newly generated sudoku puzzle and its solution, like this:
      ```
      {
-        "sudoku":".497.62.3.31894.6.76.23.849....79184....1.75.5....839265.4...31......425..3.2.678",
-        "roundToCreateFulfilledPuzzle":81,
-        "hiddenCells":36,"solution":"849756213231894567765231849326579184984312756517648392652487931178963425493125678"
+         "sudoku":".497.62.3.31894.6.76.23.849....79184....1.75.5....839265.4...31......425..3.2.678",
+         "roundToCreateFulfilledPuzzle":81,
+         "hiddenCells":36
+         "solution":"849756213231894567765231849326579184984312756517648392652487931178963425493125678"
      }
      ```
 
-   
 
-
+# Algorithm 
 
 ## How to create a new sudoku puzzle?
 
-  #### 1- need a random fulfilled sudoku puzzle
+  #### 1 - Generate a random fulfilled sudoku puzzle
   - 9x9 puzzle with numbers from 1-9
 
-     - at begining puzzle shold looks like [1-9].repeat(81) - array with 81 element, each ele is also a arr with 1-9 inside of it
-     - find the minlenth of all arr element and take a random one as target
-     - get a random number from the target
-     - update the line, row and region, all the array element should not have the random number anymore
-     - during the update process check the arr ele make sure each arr ele's length > 0
-     - if any arr ele is empty after update, change puzzle to init state and restar the process
-     - if the ele arr has only one num inside it. it will be push to hide
-     - replace the arr ele with the random number
-     - repeat this process 81 times until all element in puzzle are numbers(no array ele left)
+     - at the beginning puzzle should look like [1-9].repeat(81) - puzzle with 81 cells, each cell is an arr with 1-9 inside of it
+     - find the min length of all arr cells and look up those cells with the min length
+     - randomly take one of the shortest cell as target
+     - the target is an arr now get a random number from it
+     - use that number to update all cells of the same line, row and region, all the array cells should not have that number anymore
+       - after the update, check the cell's length, it should be bigger than 0 
+         - if any arr cell is empty after the update, change the puzzle to init state and restart the whole process
+       - if the arr cell has only one number inside it. it will be pushed to an array, which will be used to hide cells after
+       - replace the arr cell with that random number
+     - repeat this process 81 times until all cells in the puzzle are numbers
 
    
-  #### 2- hide some element of it
-  - hide all the ele in the hide arr
-  - That means for level one(what we only have now), each hidden num is a unique num for it's cell duiring the process of create the fulfilled puzzle
+  #### 2 - hide some cells of it
+  - hide all the cells in the hide arr
+  - That means for level easy/one (what we only have now), each hidden number is a unique choice for its cell during the process of creating the fulfilled puzzle
   - so the puzzle should always have one unique solution
          
