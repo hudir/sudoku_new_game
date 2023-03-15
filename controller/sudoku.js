@@ -17,10 +17,11 @@ class Sudoku{
 
     createNewFulfilledPuzzle(){
         for(let i = 0; i < 81; i++){
-            const num = this.randomNum(this.puzzle[i])
-            this.puzzle[i] = num
-            this.updateRow(i, num)
-            this.updateColumn(i, num)
+            const target = this.shortestArr()
+            const num = this.randomNum(this.puzzle[target])
+            this.puzzle[target] = num
+            this.updateRow(target, num)
+            this.updateColumn(target, num)
 
         }
 

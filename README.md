@@ -30,7 +30,7 @@ You can use broswer with the url [http://localhost:5000/newgame](http://localhos
   #### 1- need a random fulfilled sudoku puzzle
   - 9x9 puzzle with numbers from 1-9
      - at begining puzzle shold looks like [1-9].repeat(81) - array with 81 element, each ele is also a arr with 1-9 inside of it
-     <!-- - store the puzzle and take a random number from the first array element(this not works, thoes element maybe empty) -->
+     X - store the puzzle and take a random number from the first array element(this not works, thoes element maybe empty)
      - find the first shortes array element, and get a random number from it
      - update the line, row and region, all the array element should not have the random number anymore
      - check the whole puzzle make sure each arr ele's length >= 1
