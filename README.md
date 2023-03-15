@@ -45,6 +45,6 @@ You can use broswer with the url [http://localhost:5000/newgame](http://localhos
   - check each region
    
   #### 2- hide some element of it
-  - hide all the ele, who were in the hide arr
+  - hide all the ele in the hide arr
   - but make sure the puzzle still have and only have one unique solution
          

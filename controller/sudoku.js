@@ -128,3 +128,4 @@ console.log(test.roundToCreateFulfilledPuzzle)
 console.log(test.timesToMakePuzzle)
 console.log(test.hide.length)
 
+module.exports = Sudoku
