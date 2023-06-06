@@ -9,7 +9,7 @@ const newGameRouter = require('./routes/new_game_router')
 app.use(express.json());
 app.use(cors());
 
-basicUrl = DOMIN + PORT
+basicUrl = DOMIN
 app.get('/', (req,res) => {
     res.send(`
     <h1>Welcome to simple Sudoku new game server</h1>
