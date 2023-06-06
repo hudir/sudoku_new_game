@@ -1,3 +1,5 @@
+[Live](https://soduko-new-game.onrender.com/)
+
 [About](#sudoku-new-game)
 
 [Quick start](#how-to-start-the-server-locally)
